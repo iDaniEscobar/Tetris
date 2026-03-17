@@ -1,4 +1,5 @@
 #include <iostream>
+#include "tablero.h"
 
 using namespace std;
 
@@ -23,40 +24,12 @@ int main()
 
     unsigned char anchoBytes = (unsigned char)(ancho / 8);
 
-    unsigned char** tablero = new unsigned char*[alto];
-    for (char i = 0; i < alto; i++) {
-        tablero[i] = new unsigned char[anchoBytes];
-        for (char j = 0; j < anchoBytes; j++) {
-            tablero[i][j] = 0;
-        }
-    }
-
+    unsigned char** tablero = crearTablero(alto, anchoBytes);
 
     cout << endl << "Visualizacion del tablero" << endl;
 
-    for (char i = 0; i < alto; i++) {
-        cout << "|";
-
-        for (char j = 0; j < anchoBytes; j++) {
-
-            for (char bit = 7; bit >= 0; bit--) {
-
-                if ((tablero[i][j] >> bit) & 1) {
-                    cout << "[]";
-                } else {
-                    cout << "  ";
-                }
-            }
-        }
-        cout << "|" << endl;
-    }
-
-
-
-    for (char i = 0; i < alto; i++) {
-        delete[] tablero[i];
-    }
-    delete[] tablero;
+    visualizarTablero(tablero, alto, anchoBytes);
+    liberarTablero(tablero, alto);
 
     return 0;
 }
