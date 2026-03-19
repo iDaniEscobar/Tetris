@@ -1,10 +1,16 @@
 #include <iostream>
 #include "tablero.h"
+#include "piezas.h"
+#include <ctime>
+#include <cstdlib>
+
 
 using namespace std;
 
 int main()
 {
+    //Para ver el tablero
+
     unsigned short alto, ancho;
 
     cout << "Ingrese el alto del tablero: ";
@@ -30,6 +36,15 @@ int main()
 
     visualizarTablero(tablero, alto, anchoBytes);
     liberarTablero(tablero, alto);
+
+    // Pruebas de visualización de piezas
+    srand(time(0));
+
+    signed char pieza = rand() % num_pieza;
+
+    cout << endl << "Pieza: " << (int)pieza << endl;
+
+    dibujarPieza(piezas[pieza]);
 
     return 0;
 }
