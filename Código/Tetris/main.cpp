@@ -34,17 +34,20 @@ int main()
 
     cout << endl << "Visualizacion del tablero" << endl;
 
-    visualizarTablero(tablero, alto, anchoBytes);
-    liberarTablero(tablero, alto);
+    //visualizarTablero(tablero, alto, anchoBytes);
+
 
     // Pruebas de visualización de piezas
     srand(time(0));
 
     signed char pieza = rand() % num_pieza;
 
-    cout << endl << "Pieza: " << (int)pieza << endl;
+    signed char colInicial = (signed char)((ancho / 2) - 2);
+    signed char filaInicial = 0;
 
-    dibujarPieza(piezas[pieza]);
+    visualizarTableroConPieza(tablero, alto, anchoBytes, piezas[pieza], filaInicial, colInicial);
 
+
+    liberarTablero(tablero, alto);
     return 0;
 }

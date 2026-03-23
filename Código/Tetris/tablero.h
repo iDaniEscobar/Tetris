@@ -4,5 +4,7 @@
 unsigned char** crearTablero(unsigned short alto, unsigned char anchoBytes);
 void visualizarTablero(unsigned char** tablero, unsigned short alto, unsigned char anchoBytes);
 void liberarTablero(unsigned char** tablero, unsigned short alto);
+void visualizarTableroConPieza(unsigned char** tablero, unsigned short alto, unsigned char anchoBytes,
+                               unsigned short piezaForma, signed char filaP, signed char colP);
 
 #endif
