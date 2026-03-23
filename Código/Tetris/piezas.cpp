@@ -53,3 +53,20 @@ void dibujarPieza(unsigned short pieza) {
         if ((i + 1) % 4 == 0) cout << endl;
     }
 }
+
+unsigned short rotarPiezas(unsigned short piezaOriginal) {
+    unsigned short piezaRotada = 0;
+
+    for (signed char f = 0; f < 4; f++) {
+        for (signed char c = 0; c < 4; c++) {
+            if ((piezaOriginal >> (15 - (f * 4 + c))) & 1) {
+
+                signed char nuevaF = c;
+                signed char nuevaC = 3 - f;
+
+                piezaRotada |= (1 << (15 - (nuevaF * 4 + nuevaC)));
+            }
+        }
+    }
+    return piezaRotada;
+}

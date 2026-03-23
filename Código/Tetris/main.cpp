@@ -41,6 +41,7 @@ int main()
     srand(time(0));
 
     signed char pieza = rand() % num_pieza;
+    unsigned short piezaActual = piezas[pieza];
 
     signed char colP = (signed char)((ancho / 2) - 2);
     signed char filaP = -3;
@@ -49,9 +50,8 @@ int main()
     //visualizarTableroConPieza(tablero, alto, anchoBytes, piezas[pieza], filaP, colP);
 
     while (tecla != 'q' && tecla != 'Q') {
-
-        // Dibujamos el estado actual
-        visualizarTableroConPieza(tablero, alto, anchoBytes, piezas[pieza], filaP, colP);
+         //Visualizacion del tablero
+        visualizarTableroConPieza(tablero, alto, anchoBytes, piezaActual, filaP, colP);
 
         cout << "Controles: [A]Izq, [D]Der, [S]Bajar, [W]Rotar, [Q]Salir: ";
         cin >> tecla;
@@ -59,33 +59,38 @@ int main()
         // Lógica de movimiento
         if (tecla == 'a' || tecla == 'A') {
 
-            if (validarMovimiento(tablero, alto, anchoBytes, piezas[pieza], filaP, colP - 1)) {
+            if (validarMovimiento(tablero, alto, anchoBytes, piezaActual, filaP, colP - 1)) {
                 colP--;
             }
         }
 
         else if (tecla == 'd' || tecla == 'D') {
 
-            if (validarMovimiento(tablero, alto, anchoBytes, piezas[pieza], filaP, colP + 1)) {
+            if (validarMovimiento(tablero, alto, anchoBytes, piezaActual, filaP, colP + 1)) {
                 colP++;
             }
         }
 
         else if (tecla == 'w' || tecla == 'W') {
+            unsigned short piezaProvisional = rotarPiezas(piezaActual);
 
+            if (validarMovimiento(tablero, alto, anchoBytes, piezaProvisional, filaP, colP)) {
+                piezaActual = piezaProvisional;
+            }
         }
 
         else if (tecla == 's' || tecla == 'S') {
 
-            if (validarMovimiento(tablero, alto, anchoBytes, piezas[pieza], filaP + 1, colP)) {
+            if (validarMovimiento(tablero, alto, anchoBytes, piezaActual, filaP + 1, colP)) {
                 filaP++;
             }
             else {
-                fijarPieza(tablero, piezas[pieza], filaP, colP);
+                fijarPieza(tablero, piezaActual, filaP, colP);
                 pieza = rand() % num_pieza;
+                piezaActual = piezas[pieza];
                 filaP = -3;
                 colP = (signed char)((ancho / 2) - 2);
-                if (!validarMovimiento(tablero, alto, anchoBytes, piezas[pieza], filaP, colP)) {
+                if (!validarMovimiento(tablero, alto, anchoBytes, piezaActual, filaP, colP)) {
                     cout << "GAME OVER" << endl;
                     tecla = 'q';
                 }
