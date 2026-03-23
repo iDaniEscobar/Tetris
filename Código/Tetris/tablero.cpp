@@ -62,3 +62,54 @@ void visualizarTableroConPieza(unsigned char** tablero, unsigned short alto, uns
         cout << "|" << endl;
     }
 }
+
+bool validarMovimiento(unsigned char** tablero, unsigned short alto, unsigned char anchoBytes,
+                       unsigned short piezaForma, signed char nuevaFila, signed char nuevaCol) {
+
+    for (signed char f = 0; f < 4; f++) {
+        for (signed char c = 0; c < 4; c++) {
+            if ((piezaForma >> (15 - (f * 4 + c))) & 1) {
+                signed char fDestino = nuevaFila + f;
+                signed char cDestino = nuevaCol + c;
+
+                if (cDestino < 0 || cDestino >= (anchoBytes * 8)) {
+                    return false;
+                }
+
+                if (fDestino >= (signed char)alto) {
+                    return false;
+                }
+
+                if (fDestino >= 0) {
+                    signed char j = cDestino / 8;
+                    signed char bit = 7 - (cDestino % 8);
+                    if ((tablero[fDestino][j] >> bit) & 1) {
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+    return true;
+}
+
+void fijarPieza(unsigned char** tablero, unsigned short piezaForma, signed char filaP, signed char colP) {
+    for (signed char f = 0; f < 4; f++) {
+        for (signed char c = 0; c < 4; c++) {
+
+            if ((piezaForma >> (15 - (f * 4 + c))) & 1) {
+                signed char fTab = filaP + f;
+                signed char cTab = colP + c;
+
+                if (fTab >= 0) {
+                    signed char j = cTab / 8;
+                    signed char bit = 7 - (cTab % 8);
+
+                    tablero[fTab][j] |= (1 << bit);
+                }
+            }
+        }
+    }
+}
+
+

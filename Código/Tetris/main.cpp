@@ -42,10 +42,56 @@ int main()
 
     signed char pieza = rand() % num_pieza;
 
-    signed char colInicial = (signed char)((ancho / 2) - 2);
-    signed char filaInicial = 0;
+    signed char colP = (signed char)((ancho / 2) - 2);
+    signed char filaP = -3;
+    char tecla = ' ';
 
-    visualizarTableroConPieza(tablero, alto, anchoBytes, piezas[pieza], filaInicial, colInicial);
+    //visualizarTableroConPieza(tablero, alto, anchoBytes, piezas[pieza], filaP, colP);
+
+    while (tecla != 'q' && tecla != 'Q') {
+
+        // Dibujamos el estado actual
+        visualizarTableroConPieza(tablero, alto, anchoBytes, piezas[pieza], filaP, colP);
+
+        cout << "Controles: [A]Izq, [D]Der, [S]Bajar, [W]Rotar, [Q]Salir: ";
+        cin >> tecla;
+
+        // Lógica de movimiento
+        if (tecla == 'a' || tecla == 'A') {
+
+            if (validarMovimiento(tablero, alto, anchoBytes, piezas[pieza], filaP, colP - 1)) {
+                colP--;
+            }
+        }
+
+        else if (tecla == 'd' || tecla == 'D') {
+
+            if (validarMovimiento(tablero, alto, anchoBytes, piezas[pieza], filaP, colP + 1)) {
+                colP++;
+            }
+        }
+
+        else if (tecla == 'w' || tecla == 'W') {
+
+        }
+
+        else if (tecla == 's' || tecla == 'S') {
+
+            if (validarMovimiento(tablero, alto, anchoBytes, piezas[pieza], filaP + 1, colP)) {
+                filaP++;
+            }
+            else {
+                fijarPieza(tablero, piezas[pieza], filaP, colP);
+                pieza = rand() % num_pieza;
+                filaP = -3;
+                colP = (signed char)((ancho / 2) - 2);
+                if (!validarMovimiento(tablero, alto, anchoBytes, piezas[pieza], filaP, colP)) {
+                    cout << "GAME OVER" << endl;
+                    tecla = 'q';
+                }
+            }
+        }
+    }
 
 
     liberarTablero(tablero, alto);
