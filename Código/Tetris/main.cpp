@@ -9,22 +9,25 @@ using namespace std;
 
 int main()
 {
-    //Para ver el tablero
-
     unsigned short alto, ancho;
 
-    cout << "Ingrese el alto del tablero: ";
+    cout << "+---------------------------------------------------------+" << endl;
+    cout << "+                          TETRIS                         +" << endl;
+    cout << "+---------------------------------------------------------+" << endl;
+    cout << "+                                                         +" << endl;
+    cout << "+ Ingrese el alto del tablero: ";
     cin >> alto;
 
-    cout << "Ingrese el ancho del tablero: ";
+    cout << "+ Ingrese el ancho del tablero: ";
     cin >> ancho;
 
     while (alto < 8 || ancho < 8 || (ancho % 8 != 0)) {
-        cout << "Dimensiones no validas. Recuerde que el alto y ancho minimo es 8" << endl<< "y el ancho debe ser multiplo de 8." << endl;
-        cout << "Ingrese el alto del tablero: ";
+        cout << "+                                                         +" << endl;
+        cout << "+ Dimensiones no validas. Recuerde que el alto y ancho" << endl << "+ minimo es 8, y el ancho debe ser multiplo de 8." << endl;
+        cout << "+                                                         +" << endl;
+        cout << "+ Ingrese el alto del tablero: ";
         cin >> alto;
-
-        cout << "Ingrese el ancho del tablero: ";
+        cout << "+ Ingrese el ancho del tablero: ";
         cin >> ancho;
     }
 
@@ -32,12 +35,8 @@ int main()
 
     unsigned char** tablero = crearTablero(alto, anchoBytes);
 
-    cout << endl << "Visualizacion del tablero" << endl;
+    cout << endl << "+ Visualizacion del tablero" << endl;
 
-    //visualizarTablero(tablero, alto, anchoBytes);
-
-
-    // Pruebas de visualización de piezas
     srand(time(0));
 
     signed char pieza = rand() % num_pieza;
@@ -46,8 +45,6 @@ int main()
     signed char colP = (signed char)((ancho / 2) - 2);
     signed char filaP = -3;
     char tecla = ' ';
-
-    //visualizarTableroConPieza(tablero, alto, anchoBytes, piezas[pieza], filaP, colP);
 
     while (tecla != 'q' && tecla != 'Q') {
          //Visualizacion del tablero
@@ -94,7 +91,10 @@ int main()
                 filaP = -3;
                 colP = (signed char)((ancho / 2) - 2);
                 if (!validarMovimiento(tablero, alto, anchoBytes, piezaActual, filaP, colP)) {
-                    cout << "GAME OVER" << endl;
+                    cout << endl;
+                    cout << "+---------------------------------------------------------+" << endl;
+                    cout << "+                       GAME OVER                         +" << endl;
+                    cout << "+---------------------------------------------------------+" << endl;
                     tecla = 'q';
                 }
             }
