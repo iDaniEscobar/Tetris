@@ -9,5 +9,6 @@ void visualizarTableroConPieza(unsigned char** tablero, unsigned short alto, uns
 void fijarPieza(unsigned char** tablero, unsigned short piezaForma, signed char filaP, signed char colP);
 bool validarMovimiento(unsigned char** tablero, unsigned short alto, unsigned char anchoBytes,
                        unsigned short piezaForma, signed char nuevaFila, signed char nuevaCol);
+void eliminarFilas(unsigned char** tablero, unsigned short alto, unsigned char anchoBytes);
 
 #endif

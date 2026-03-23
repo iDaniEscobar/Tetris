@@ -86,6 +86,9 @@ int main()
             }
             else {
                 fijarPieza(tablero, piezaActual, filaP, colP);
+
+                eliminarFilas(tablero, alto, anchoBytes);
+
                 pieza = rand() % num_pieza;
                 piezaActual = piezas[pieza];
                 filaP = -3;

@@ -112,4 +112,32 @@ void fijarPieza(unsigned char** tablero, unsigned short piezaForma, signed char 
     }
 }
 
+void eliminarFilas(unsigned char** tablero, unsigned short alto, unsigned char anchoBytes) {
+
+    for (signed char i = alto - 1; i >= 0; i--) {
+        bool filaLlena = true;
+
+        for (signed char j = 0; j < anchoBytes; j++) {
+            if (tablero[i][j] != 255) {
+                filaLlena = false;
+                break;
+            }
+        }
+
+        if (filaLlena) {
+            for (signed char k = i; k > 0; k--) {
+                for (signed char j = 0; j < anchoBytes; j++) {
+                    tablero[k][j] = tablero[k - 1][j];
+                }
+            }
+
+            for (signed char j = 0; j < anchoBytes; j++) {
+                tablero[0][j] = 0;
+            }
+
+            i++;
+        }
+    }
+}
+
 
